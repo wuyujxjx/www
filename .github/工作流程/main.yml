@@ -1,0 +1,28 @@
+在：
+   workflow_dispatch：
+   时间表：
+     #代表国际标准时间23点0分，北京时间需要+8小时，代表北京时间上午7点运行
+- cron: '0 23 * * *'
+     #代表国际标准时间21点30分，北京时间需要+8小时，代表北京时间上午5点30分点运行
+工作：
+ #将工作流程中运行的所有作业组合在一起
+   构建：
+  #定义名为 build 的作业。子键将定义作业的属性
+    运行：ubuntu-latest
+    步骤：
+- 使用：actions/checkout@v2
+    
+-名称：设置Python 3.9
+        使用：actions/setup-python@v2
+        与：
+          python版本：3.9.1
+-名称：设置时区
+        运行：|
+cp /usr/share/zoneinfo/亚洲/上海等/当地时间
+-名称：安装pip软件包
+        运行：|
+python -m pip安装--升级pip
+pip3 install -r requirements.txt
+- 姓名： weixin
+        运行：|
+python3 main.py
